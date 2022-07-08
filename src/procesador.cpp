@@ -14,7 +14,7 @@ Procesador::Procesador(istream *streamPersonas, istream *streamNomina, istream *
     this->streamHoras = streamHoras;
 }
 
-void Procesador::anadirSalariosNomina()
+void Procesador::AnadirSalariosNomina()
 {
     string infoNomina{};
     int idEmpleado = 0;
@@ -28,7 +28,7 @@ void Procesador::anadirSalariosNomina()
         salariosNomina.insert(std::pair<int, float>(idEmpleado, salario));
     }
 }
-void Procesador::anadirSalariosHoras()
+void Procesador::AnadirSalariosHoras()
 {
     string infoHoras{};
     int idEmpleado = 0;
@@ -45,11 +45,11 @@ void Procesador::anadirSalariosHoras()
     }
 }
 
-void Procesador::anadirEmpleados()
+void Procesador::AnadirEmpleados()
 {
 
-    anadirSalariosHoras();
-    anadirSalariosNomina();
+    AnadirSalariosHoras();
+    AnadirSalariosNomina();
     string infoPersona{};
 
     while (std::getline(*(this->streamPersonas), infoPersona))
@@ -101,17 +101,17 @@ void Procesador::anadirEmpleados()
     }
 }
 
-float Procesador::obtenerNomina(int id)
+float Procesador::ObtenerNomina(int id)
 {
     return salariosNomina.at(id);
 }
 
-string Procesador::obtenerHoras(int id)
+string Procesador::ObtenerHoras(int id)
 {
     return salariosHora.at(id);
 }
 
-string Procesador::obtenerEmpleado(int id)
+string Procesador::ObtenerEmpleado(int id)
 {
 
     Empleado *empleadoSolicitado = empleados->ObtenerEmpleado(id);
@@ -120,7 +120,15 @@ string Procesador::obtenerEmpleado(int id)
 
     return infoSolicitada;
 }
+float Procesador::ObtenerTotal()
+{
+    return this->total;
+}
+float Procesador::Obtenerimpuestos()
+{
 
+    return this->impuestos;
+}
 std::ostream &operator<<(ostream &o, const Procesador *procesador)
 {
 
