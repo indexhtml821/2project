@@ -35,4 +35,20 @@ namespace
     EXPECT_EQ(esperada, actual);
   }
 
+  TEST(Tests_Empleado_Horas, Test_InfoEmpleadosParaArchivos)
+  {
+    /// AAA
+
+    // Arrange - configurar el escenario
+    EmpleadoHoras empleadoHoras(1, "Denis", "Tyler", "denis_tyler@biz.com", 1, 1, 55, 42.26);
+
+    // Act - ejecute la operación`-
+    empleadoHoras.CalculoPago();
+    string actual = empleadoHoras.InfoEmpleadoParaArchivo();
+    string esperada = "1 Denis Tyler 2324.3";
+
+    // Assert - valide los resultados
+    EXPECT_EQ(esperada, actual);
+  }
+
 }
