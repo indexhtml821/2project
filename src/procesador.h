@@ -23,12 +23,14 @@ protected:
 
 public:
   Procesador(istream *streamPersonas, istream *streamNomina, istream *streamHoras);
-  void anadirSalariosNomina();
-  void anadirSalariosHoras();
-  void anadirEmpleados();
-  float obtenerNomina(int id);
-  string obtenerHoras(int id);
-  string obtenerEmpleado(int id);
+  void AnadirSalariosNomina();
+  void AnadirSalariosHoras();
+  void AnadirEmpleados();
+  float ObtenerNomina(int id);
+  string ObtenerHoras(int id);
+  string ObtenerEmpleado(int id);
+  float ObtenerTotal();
+  float Obtenerimpuestos();
   friend ostream &operator<<(ostream &o, const Procesador *procesador);
 };
 
