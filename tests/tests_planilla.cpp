@@ -57,8 +57,6 @@ namespace
 
         string esperado = "1 juan carrillo juancarrillo@ucr 1 1 4600.00 0.000\n2 Denis Tyler denis_tyler@biz.com 1 1 55 42.26 0.0\n3 juan carrillo juancarrillo@ucr 1 2 4600.00 0.000\n4 juana carrillo juancarrillo@ucr 1 2 4900.00 0.000\n5 Steven Tyler steven_tyler@biz.com 1 1 50 42.26 0.0\n6 maria carrillo mariacarrillo@ucr 1 5 4900.00 0.000\n";
         string resultado = planilla->RecorrerArbol(*nodoSupervisor);
-        cout << resultado << endl;
-
         //  delete planilla;
         // delete empleado;
 
