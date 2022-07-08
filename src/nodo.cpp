@@ -21,7 +21,7 @@ void Nodo ::InsertarSupervisor(Nodo *supervisor)
 void Nodo ::InsertarSupervisar(Nodo *supervisar)
 {
 
-    this->empleadosASupervisar.insert(std::pair<int, Nodo *>(supervisar->DevolverEmpleado()->ObtenerIdEmpleado(), supervisar));
+    this->empleadosASupervisar.push_back(supervisar);
 }
 
 Empleado *Nodo::DevolverSupervisor()
@@ -31,33 +31,26 @@ Empleado *Nodo::DevolverSupervisor()
 }
 Empleado *Nodo ::DevolverSupervisar(int id)
 {
-    Empleado *empleadoSolicitado = this->empleadosASupervisar.at(id)->DevolverEmpleado();
-    return empleadoSolicitado;
+
+    Empleado *empleadoADevolver;
+    for (Nodo *empleado : this->empleadosASupervisar)
+    {
+        if (empleado->DevolverEmpleado()->ObtenerIdEmpleado() == id)
+        {
+            empleadoADevolver = empleado->DevolverEmpleado();
+        }
+    }
+    return empleadoADevolver;
+}
+
+vector<Nodo *> Nodo::DevolverSupervisados()
+{
+
+    return this->empleadosASupervisar;
 }
 Empleado *Nodo::DevolverEmpleado()
 {
 
     Empleado *empleadoSolicitado = this->empleado;
     return empleadoSolicitado;
-}
-
-string Nodo::DevolverInfoNodo()
-{
-    string info = "";
-    auto iter = this->empleadosASupervisar.begin();
-    if (this->empleadosASupervisar.empty())
-    {
-        return this->empleado->InfoCompletaEmpleados() + "/n";
-    }
-    else
-    {
-
-        while (iter != this->empleadosASupervisar.end())
-        {
-
-            info += iter->second->DevolverInfoNodo();
-            iter++;
-        }
-        return info += this->empleado->InfoCompletaEmpleados();
-    }
 }

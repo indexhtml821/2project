@@ -2,7 +2,7 @@
 #define NODO_H
 
 #include "empleado.h"
-#include <map>
+#include <vector>
 
 using namespace std;
 
@@ -12,7 +12,7 @@ protected:
     int id = 0;
     Empleado *empleado;
     Nodo *supervisor;
-    map<int, Nodo *> empleadosASupervisar;
+    vector<Nodo *> empleadosASupervisar;
 
 public:
     ~Nodo();
@@ -23,8 +23,8 @@ public:
     void InsertarSupervisar(Nodo *supervisado);
     Empleado *DevolverSupervisor();
     Empleado *DevolverSupervisar(int id);
+    vector<Nodo *> DevolverSupervisados();
     Empleado *DevolverEmpleado();
-    string DevolverInfoNodo();
 };
 
 #endif
