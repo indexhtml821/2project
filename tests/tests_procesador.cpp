@@ -8,7 +8,7 @@ namespace
     /// AAA
 
     // Arrange - configurar el escenario
-    string pruebaNomina = "1 4600.98";
+    string pruebaNomina = "1 4600.98 \n 2 3700.24";
     string pruebaPersonas = "cumple requisito";
     string pruebaHoras = "cumple requisito ";
     istringstream streamNomina(pruebaNomina);
@@ -18,12 +18,17 @@ namespace
     Procesador procesador(&streamPersonas, &streamNomina, &streamHoras);
 
     // Act - ejecute la operación`-
-    procesador.anadirSalariosNomina();
+    procesador.AnadirSalariosNomina();
+
+    float impuestosEsperado = 581.08539;
+    float impuestosResultado = procesador.Obtenerimpuestos();
 
     // Assert - valide los resultados
 
+    EXPECT_FLOAT_EQ(impuestosEsperado, impuestosResultado);
+
     float esperada = 4600.98;
-    float resultado = procesador.obtenerNomina(1);
+    float resultado = procesador.ObtenerNomina(1);
 
     EXPECT_FLOAT_EQ(esperada, resultado);
   }
@@ -43,12 +48,12 @@ namespace
     Procesador procesador(&streamPersonas, &streamNomina, &streamHoras);
 
     // Act - ejecute la operación`-
-    procesador.anadirSalariosHoras();
+    procesador.AnadirSalariosHoras();
 
     // Assert - valide los resultados
 
     string esperada = "34.84 43";
-    string resultado = procesador.obtenerHoras(452);
+    string resultado = procesador.ObtenerHoras(452);
 
     EXPECT_EQ(esperada, resultado);
   }
@@ -84,16 +89,21 @@ namespace
     Procesador procesador(&streamPersonas, &streamNomina, &streamHoras);
 
     // Act - ejecute la operación`-
-    procesador.anadirEmpleados();
+    procesador.AnadirEmpleados();
 
     // Assert - valide los resultados
+
+    float totalResultado = procesador.ObtenerTotal();
+    float totalEsperado = 11397;
+
+    EXPECT_FLOAT_EQ(totalEsperado, totalResultado);
 
     string esperada[4] = {"1 Denis Tyler 4278.837", "2 Clarissa Parker 2880.675", "487 Bart Noon 2754.6", "516 Rosa Tait 944.0"};
     int idResultado[4] = {1, 2, 487, 516};
 
     for (int i = 0; i < 4; i++)
     {
-      string resultado = procesador.obtenerEmpleado(idResultado[i]);
+      string resultado = procesador.ObtenerEmpleado(idResultado[i]);
       EXPECT_EQ(esperada[i], resultado);
     }
   }
