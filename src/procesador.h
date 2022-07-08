@@ -19,7 +19,7 @@ protected:
   map<int, float> salariosNomina;
   map<int, string> salariosHora;
   float total = 0;
-  float impuestos=0;
+  float impuestos = 0;
 
 public:
   Procesador(istream *streamPersonas, istream *streamNomina, istream *streamHoras);
