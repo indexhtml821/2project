@@ -5,7 +5,7 @@
 
 namespace
 {
-  TEST(Tests_Empleado_Horas, Test_CrearNodo)
+  TEST(Tests_Nodo, Test_CrearNodo)
   {
     /// AAA
 
@@ -26,7 +26,7 @@ namespace
     EXPECT_EQ(esperada, actual);
   }
 
-  TEST(Tests_Empleado_Horas, Test_InsertarSupervisorySupervisado)
+  TEST(Tests_Nodo, Test_InsertarSupervisorySupervisado)
   {
     /// AAA
 
@@ -34,12 +34,16 @@ namespace
     EmpleadoHoras *empleadoHoras = new EmpleadoHoras(2, "Denis", "Tyler", "denis_tyler@biz.com", 1, 1, 55, 42.26);
     Nodo *nodo = new Nodo(empleadoHoras->ObtenerIdEmpleado(), empleadoHoras);
 
+    Empleado *empleadoNomina = new EmpleadoNomina(3, "juan", "carrillo", "juancarrillo@ucr", 1, 1, 4600);
+    Nodo *nodo1 = new Nodo(empleadoNomina->ObtenerIdEmpleado(), empleadoNomina);
+
     EmpleadoHoras *empleadoHoraSupervisor = new EmpleadoHoras(1, "Steven", "Tyler", "steven_tyler@biz.com", 1, 1, 50, 42.26);
     Nodo *nodoSupervisor = new Nodo(empleadoHoraSupervisor->ObtenerIdEmpleado(), empleadoHoraSupervisor);
 
     nodo->InsertarSupervisor(nodoSupervisor);
 
     nodoSupervisor->InsertarSupervisar(nodo);
+    nodoSupervisor->InsertarSupervisar(nodo1);
 
     // Act - ejecute la operación`-
 
@@ -54,52 +58,10 @@ namespace
     string actual1 = empleadoResultadoSupervisar->InfoCompletaEmpleados();
     string esperada1 = empleadoHoras->InfoCompletaEmpleados();
 
-    // Assert - valide los resultados
+    Empleado *empleadoResultadoSupervisar2 = nodoSupervisor->DevolverSupervisar(3);
 
-    // se valida nodo haya guardado correctamente el supervisor
-    EXPECT_EQ(esperada, actual);
-
-    // se valida nodo haya guardado correctamente el supervisado
-    EXPECT_EQ(esperada1, actual1);
-
-    delete nodo;
-    delete nodoSupervisor;
-  }
-
-  TEST(Tests_Empleado_Horas, Test_DevolverInfoNodo)
-  {
-    /// AAA
-   //
-    // Arrange - configurar el escenario
-
-    EmpleadoHoras *empleadoHoraSupervisor = new EmpleadoHoras(1, "Steven", "Tyler", "steven_tyler@biz.com", 1, 1, 50, 42.26);
-    Nodo *nodoSupervisor = new Nodo(empleadoHoraSupervisor->ObtenerIdEmpleado(), empleadoHoraSupervisor);
-
-    EmpleadoHoras *empleadoHoras = new EmpleadoHoras(2, "Denis", "Tyler", "denis_tyler@biz.com", 1, 1, 55, 42.26);
-    Nodo *nodo = new Nodo(empleadoHoras->ObtenerIdEmpleado(), empleadoHoras);
-
-    EmpleadoNomina *empleadoNomina = new EmpleadoNomina(3, "juan", "carrillo", "juancarrillo@ucr", 1, 1, 4600);
-    Nodo *nodo = new Nodo(empleadoHoras->ObtenerIdEmpleado(), empleadoHoras);
-
-        EmpleadoNomina *empleadoNomina = new EmpleadoNomina(3, "juan", "carrillo", "juancarrillo@ucr", 1, 1, 4600);
-    Nodo *nodo = new Nodo(empleadoHoras->ObtenerIdEmpleado(), empleadoHoras);
-
-    nodo->InsertarSupervisor(nodoSupervisor);
-
-    nodoSupervisor->InsertarSupervisar(nodo);
-
-    // Act - ejecute la operación`-
-
-    // Obtiene el supervisor y checa si es insertadoc correctamente
-    Empleado *empleadoResultado = nodo->DevolverSupervisor();
-
-    string actual = empleadoResultado->InfoCompletaEmpleados();
-    string esperada = empleadoHoraSupervisor->InfoCompletaEmpleados();
-
-    Empleado *empleadoResultadoSupervisar = nodoSupervisor->DevolverSupervisar(2);
-
-    string actual1 = empleadoResultadoSupervisar->InfoCompletaEmpleados();
-    string esperada1 = empleadoHoras->InfoCompletaEmpleados();
+    string actual2 = empleadoResultadoSupervisar2->InfoCompletaEmpleados();
+    string esperada2 = empleadoNomina->InfoCompletaEmpleados();
 
     // Assert - valide los resultados
 
@@ -109,7 +71,11 @@ namespace
     // se valida nodo haya guardado correctamente el supervisado
     EXPECT_EQ(esperada1, actual1);
 
+    // se valida nodo haya guardado correctamente el más de 1 supervisado
+    EXPECT_EQ(esperada2, actual2);
+
     delete nodo;
+    delete nodo1;
     delete nodoSupervisor;
   }
 
