@@ -3,7 +3,7 @@
 
 namespace
 {
-  TEST(Tests_Procesador, Test_Anadir_Salarios_Nomina)
+  TEST(Tests_Procesador, Test_AnadirSalariosNomina)
   {
     /// AAA
 
@@ -28,7 +28,7 @@ namespace
     EXPECT_FLOAT_EQ(esperada, resultado);
   }
 
-  TEST(Tests_Procesador, Test_Anadir_Salarios_Horas)
+  TEST(Tests_Procesador, Test_AnadirSalariosHoras)
   {
     /// AAA
 
@@ -53,7 +53,7 @@ namespace
     EXPECT_EQ(esperada, resultado);
   }
 
-  TEST(Tests_Procesador, Test_Anadir_Empleados)
+  TEST(Tests_Procesador, TestAnadirEmpleados)
   {
     /// AAA
 
