@@ -1,5 +1,5 @@
 #include "planilla.h"
-
+#include <iostream>
 Planilla::~Planilla()
 {
     int cantidadIndices = indicePlanilla.size();
@@ -24,6 +24,7 @@ void Planilla::InsertarEmpleado(Empleado *empleadoAInsertar)
         supervisor = new Nodo(id, empleado);
         this->supervisor->InsertarSupervisar(nodoEmpleado);
         this->indicePlanilla.insert(std::pair<int, Nodo *>(id, nodoEmpleado));
+        return;
     }
     Nodo *nodoSupervisor = this->indicePlanilla.at(idSupervisor);
     nodoSupervisor->InsertarSupervisar(nodoEmpleado);
@@ -43,4 +44,24 @@ int Planilla::DevolverIndicePlanilla()
 {
 
     return this->indicePlanilla.size();
+}
+
+string Planilla ::RecorrerArbol(Nodo aBuscar)
+{
+    string info = "";
+    info += aBuscar.DevolverEmpleado()->InfoCompletaEmpleados() + "\n";
+
+    for (Nodo *empleado : aBuscar.DevolverSupervisados())
+    {
+
+        info += RecorrerArbol(*empleado);
+    }
+
+    return info;
+}
+
+Nodo *Planilla::ObtenerNodo(int id)
+{
+
+    return this->indicePlanilla.at(id);
 }

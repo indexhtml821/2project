@@ -18,6 +18,8 @@ public:
   void InsertarEmpleado(Empleado *empleadoAInsertar);
   Empleado *ObtenerEmpleado(int id);
   int DevolverIndicePlanilla();
+  string RecorrerArbol(Nodo aBuscar);
+  Nodo *ObtenerNodo(int id);
 };
 
 #endif
